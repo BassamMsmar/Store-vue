@@ -5,6 +5,7 @@
         <img :src="product.image" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
+          <p>{{ product.brand }}</p>
           <RouterLink class="btn btn-primary" :to="'/'+ product.id">Product Detail</RouterLink>
         </div>
       </div>

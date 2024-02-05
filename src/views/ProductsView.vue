@@ -2,17 +2,17 @@
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-3">
-        <Filter />
+        <FilterProducts @brands-updated="updateProducts" />
       </div>
       <div class="col-lg-9 ">
-        <ProductsList :products="products"/>
+        <ProductsList :products="filterProducts"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Filter from "../components/FilterProducts.vue";
+import FilterProducts from "../components/FilterProducts.vue";
 import ProductsList from "../components/ProductsList.vue";
 import { products } from '@/temp-data';
 
@@ -20,13 +20,23 @@ import { products } from '@/temp-data';
 export default {
   name: "ProdcutsPage",
   components: {
-    Filter,
-    ProductsList
+    ProductsList,
+    FilterProducts
   },
   data() {
     return {
-      products:products
-      
+      products:products,
+      filterProducts:products
+    }
+  },
+  methods: {
+    updateProducts(selectedBrands){
+      if (selectedBrands.length == 0){
+        this.filterProducts = this.products
+      }
+      else {
+        this.filterProducts = this.products.filter(product => selectedBrands.includes(product.brand))
+      }
     }
   }
 };
